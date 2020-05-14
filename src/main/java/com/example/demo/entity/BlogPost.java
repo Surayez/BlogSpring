@@ -10,7 +10,7 @@ public class BlogPost {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
 
     @Column(name="BLOG_ID")
-    private int blog_id;
+    private int blogId;
 
     @Column(name="FIRST_NAME")
     private String first_name;
@@ -26,8 +26,13 @@ public class BlogPost {
 
     //getters and setters
 
-    public int getBlog_id() {
-        return blog_id;
+
+    public int getBlogId() {
+        return blogId;
+    }
+
+    public void setBlogId(int blogId) {
+        this.blogId = blogId;
     }
 
     public String getFirst_name() {

@@ -7,7 +7,7 @@ import java.util.List;
 public interface CommentService {
 
     // Comments
-//    List<Comment> retrieveAllCommentsByBlogId(int id);
+    List<Comment> retrieveAllComments();
     public Comment getComment(int commentId);
     public void saveComment(Comment comment);
     public void deleteComment(int commentId);
