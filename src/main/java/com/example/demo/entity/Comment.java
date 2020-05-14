@@ -1,7 +1,5 @@
 package com.example.demo.entity;
 
-import io.swagger.annotations.ApiModelProperty;
-
 import javax.persistence.*;
 
 @Entity
@@ -11,8 +9,7 @@ public class Comment {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name="COMMENT_ID")
-    @ApiModelProperty(hidden=true)
-    private int comment_id;
+    private int commentId;
 
     @Column(name="NAME")
     private String name;
@@ -20,14 +17,20 @@ public class Comment {
     @Column(name="EMAIL")
     private String email;
 
+    @Column(name="COMMENT_text")
+    private String commentText;
+
     @Column(name="BLOG_ID")
     private String blogId;
 
     //getters and setters
 
+    public int getCommentId() {
+        return commentId;
+    }
 
-    public int getComment_id() {
-        return comment_id;
+    public void setCommentId(int commentId) {
+        this.commentId = commentId;
     }
 
     public String getName() {
@@ -46,11 +49,19 @@ public class Comment {
         this.email = email;
     }
 
-    public String getBlog_id() {
+    public String getCommentText() {
+        return commentText;
+    }
+
+    public void setCommentText(String commentText) {
+        this.commentText = commentText;
+    }
+
+    public String getBlogId() {
         return blogId;
     }
 
-    public void setBlog_id(String blog_id) {
-        this.blogId = blog_id;
+    public void setBlogId(String blogId) {
+        this.blogId = blogId;
     }
 }

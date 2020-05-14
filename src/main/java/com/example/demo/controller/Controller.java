@@ -28,7 +28,6 @@ public class Controller {
 
     // BLOG API
 
-
     @GetMapping("/blog")
     private List<BlogPost> getAllBlog() {
         return blogService.retrieveAllBlog();
@@ -47,14 +46,20 @@ public class Controller {
     @PostMapping("/blog")
     private int saveBlog(BlogPost blog) {
         blogService.saveBlog(blog);
-        return blog.getBlog_id();
+        return blog.getBlogId();
     }
 
     // COMMENT API
 
-//    @GetMapping("/comment/{id}")
-//    private List<Comment> getComment(@PathVariable("id") int id) {
-//        return commentService.retrieveAllCommentsByBlogId(id);
-//    }
+    @GetMapping("/comment/{id}")
+    private List<Comment> getComment(@PathVariable("id") int id) {
+        return commentService.retrieveAllComments();
+    }
+
+    @PostMapping("/comment")
+    private int saveComment(Comment comment) {
+        commentService.saveComment(comment);
+        return comment.getCommentId();
+    }
 
 }

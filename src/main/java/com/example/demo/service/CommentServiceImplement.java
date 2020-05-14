@@ -14,10 +14,10 @@ public class CommentServiceImplement implements CommentService {
     @Autowired
     CommentRepository commentRepository;
 
-//    @Override
-//    public List<Comment> retrieveAllCommentsByBlogId(int id) {
-//        return commentRepository.findByBlogId(id);
-//    }
+    @Override
+    public List<Comment> retrieveAllComments() {
+        return commentRepository.findAll();
+    }
 
     @Override
     public Comment getComment(int commentId) {
