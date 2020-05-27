@@ -56,4 +56,18 @@ public class CommentServiceImplement implements CommentService {
         commentRepository.deleteById(commentId);
     }
 
+    @Override
+    public void upvoteComment(int commentId){
+        Comment comment = getComment(commentId);
+        comment.setVotes(comment.getVotes() + 1);
+        commentRepository.save(comment);
+    }
+
+    @Override
+    public void downvoteComment(int commentId){
+        Comment comment = getComment(commentId);
+        comment.setVotes(comment.getVotes() - 1);
+        commentRepository.save(comment);
+    }
+
 }

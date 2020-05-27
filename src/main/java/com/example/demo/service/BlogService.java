@@ -10,4 +10,6 @@ public interface BlogService {
     public void saveBlog(BlogPost blog);
     public void deleteBlog(int blogId);
     public void updateBlog(BlogPost blog, int blogId);
+    public void upvoteBlog(int blogId);
+    public void downvoteBlog(int blogId);
 }

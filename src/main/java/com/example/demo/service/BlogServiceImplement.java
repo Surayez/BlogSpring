@@ -48,6 +48,21 @@ public class BlogServiceImplement implements BlogService {
     }
 
     @Override
+    public void upvoteBlog(int blogId){
+        BlogPost blog = getBlog(blogId);
+        blog.setVotes(blog.getVotes() + 1);
+        blogRepository.save(blog);
+    }
+
+    @Override
+    public void downvoteBlog(int blogId){
+        BlogPost blog = getBlog(blogId);
+        blog.setVotes(blog.getVotes() - 1);
+        blogRepository.save(blog);
+    }
+
+
+    @Override
     public void deleteBlog(int blogId) {
         blogRepository.deleteById(blogId);
     }

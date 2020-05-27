@@ -13,5 +13,6 @@ public interface CommentService {
     public void deleteComment(int commentId);
     public void updateComment(Comment comment, int commentId);
     public List<Comment> getCommentByBlogId(String blogId);
-
+    public void upvoteComment(int commentId);
+    public void downvoteComment(int commentId);
 }

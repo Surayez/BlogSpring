@@ -57,6 +57,30 @@ public class Controller {
         return blog.getBlogId();
     }
 
+    @PostMapping("/blogUp/{id}")
+    private int upvoteBlog(@PathVariable("id") int id) {
+        try{
+            blogService.upvoteBlog(id);
+            return 1;
+        }
+        catch (Exception e) {
+            logger.log(Level.SEVERE, "Failed to upvote as no such blog exists.");
+            return 0;
+        }
+    }
+
+    @PostMapping("/blogDown/{id}")
+    private int downVote(@PathVariable("id") int id) {
+        try{
+            blogService.downvoteBlog(id);
+            return 1;
+        }
+        catch (Exception e) {
+            logger.log(Level.SEVERE, "Failed to upvote as no such blog exists.");
+            return 0;
+        }
+    }
+
     // COMMENT API
 
     @GetMapping("/comment/")
@@ -69,12 +93,15 @@ public class Controller {
         // Check if the blog is present
         try {
             blogService.getBlog(Integer.parseInt(comment.getBlogId()));
+            if (comment.getParent() != 0) {
+                commentService.getComment(comment.getParent());
+            }
             commentService.saveComment(comment);
             return comment.getCommentId();
         }
         // Handle if blog isn't present
         catch (Exception e){
-            logger.log(Level.SEVERE, "Failed to save comment as no such blog exists.");
+            logger.log(Level.SEVERE, "Failed to save comment as no such blog/parent comment exists.");
             return 0;
         }
     }
@@ -99,8 +126,43 @@ public class Controller {
         return commentService.getCommentByBlogId(id);
     }
 
+    @PostMapping("/commentUp/{id}")
+    private int upvoteComment(@PathVariable("id") int id) {
+        try{
+            commentService.upvoteComment(id);
+            return 1;
+        }
+        catch (Exception e) {
+            logger.log(Level.SEVERE, "Failed to upvote as no such comment exists.");
+            return 0;
+        }
+    }
+
+    @PostMapping("/commentDown/{id}")
+    private int downvoteComment(@PathVariable("id") int id) {
+        try{
+            commentService.downvoteComment(id);
+            return 1;
+        }
+        catch (Exception e) {
+            logger.log(Level.SEVERE, "Failed to upvote as no such comment exists.");
+            return 0;
+        }
+    }
+
     @DeleteMapping("/comment/{id}")
     private void deleteComment(@PathVariable("id") int id) {
         commentService.deleteComment(id);
     }
 }
+
+// Upvotes/Downvotes
+// Threaded Comments
+// Users
+// SQL Injections
+// Paginated API
+
+// ReadMe
+// JUnitTests
+// Images (blobs)
+// Why and How
