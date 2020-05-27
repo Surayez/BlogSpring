@@ -8,6 +8,7 @@ CREATE TABLE BLOG.TBL_BLOGS (
   last_name VARCHAR(250) NOT NULL,
   email VARCHAR(250) DEFAULT NULL,
   blog TEXT DEFAULT NULL,
+  votes INT DEFAULT 0,
   created_at timestamp NOT NULL,
   updated_at timestamp NOT NULL
 );
@@ -18,6 +19,8 @@ CREATE TABLE BLOG.TBL_COMMENTS (
   email VARCHAR(250) DEFAULT NULL,
   comment_text TEXT DEFAULT NULL,
   blog_id INT NOT NULL,
+  votes INT DEFAULT 0,
+  parent INT DEFAULT 0,
   created_at timestamp NOT NULL,
   updated_at timestamp NOT NULL,
   CONSTRAINT comment_primary_key PRIMARY KEY (comment_id)

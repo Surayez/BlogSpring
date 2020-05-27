@@ -31,6 +31,10 @@ public class BlogPost {
     private String blog;
 
     @ApiModelProperty(hidden=true)
+    @Column(name="VOTES")
+    private int votes;
+
+    @ApiModelProperty(hidden=true)
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="created_at")
     @CreatedDate
@@ -99,4 +103,13 @@ public class BlogPost {
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+    public int getVotes() {
+        return votes;
+    }
+
+    public void setVotes(int votes) {
+        this.votes = votes;
+    }
+
 }

@@ -27,6 +27,13 @@ public class Comment {
     @Column(name="COMMENT_text")
     private String commentText;
 
+    @ApiModelProperty(hidden=true)
+    @Column(name="VOTES")
+    private int votes;
+
+    @Column(name="PARENT")
+    private int parent;
+
     @ApiModelProperty(required = true)
     @Column(name="BLOG_ID")
     private String blogId;
@@ -98,5 +105,21 @@ public class Comment {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public int getVotes() {
+        return votes;
+    }
+
+    public void setVotes(int votes) {
+        this.votes = votes;
+    }
+
+    public int getParent() {
+        return parent;
+    }
+
+    public void setParent(int parent) {
+        this.parent = parent;
     }
 }
