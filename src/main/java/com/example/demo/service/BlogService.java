@@ -9,5 +9,5 @@ public interface BlogService {
     public BlogPost getBlog(int blogId);
     public void saveBlog(BlogPost blog);
     public void deleteBlog(int blogId);
-    public void updateBlog(BlogPost blog);
+    public void updateBlog(BlogPost blog, int blogId);
 }

@@ -37,12 +37,19 @@ public class BlogServiceImplement implements BlogService {
     }
 
     @Override
+    public void updateBlog(BlogPost blog, int blogId) {
+        BlogPost prevBlog = getBlog(blogId);
+        prevBlog.setEmail(blog.getEmail());
+        prevBlog.setFirst_name(blog.getFirst_name());
+        prevBlog.setLast_name(blog.getLast_name());
+        prevBlog.setBlog(blog.getBlog());
+        prevBlog.setUpdatedAt(new Date());
+        blogRepository.save(prevBlog);
+    }
+
+    @Override
     public void deleteBlog(int blogId) {
         blogRepository.deleteById(blogId);
     }
 
-    @Override
-    public void updateBlog(BlogPost blog) {
-        blogRepository.save(blog);
-    }
 }

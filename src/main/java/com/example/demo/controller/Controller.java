@@ -51,6 +51,11 @@ public class Controller {
         return blog.getBlogId();
     }
 
+    @PostMapping("/blog/{id}")
+    private int updateBlog(@PathVariable("id") int id, BlogPost blog) {
+        blogService.updateBlog(blog, id);
+        return blog.getBlogId();
+    }
 
     // COMMENT API
 
@@ -74,9 +79,28 @@ public class Controller {
         }
     }
 
+    @PostMapping("/comment/{id}")
+    private int updateComment(@PathVariable("id") int id, Comment comment) {
+        // Check if the blog is present
+        try {
+            blogService.getBlog(Integer.parseInt(comment.getBlogId()));
+            commentService.updateComment(comment, id);
+            return comment.getCommentId();
+        }
+        // Handle if blog isn't present
+        catch (Exception e){
+            logger.log(Level.SEVERE, "Failed to save comment as no such blog exists.");
+            return 0;
+        }
+    }
+
     @GetMapping("/commentByBlogId/{id}")
     private List<Comment> getCommentByBlogId(@PathVariable("id") String id) {
         return commentService.getCommentByBlogId(id);
     }
 
+    @DeleteMapping("/comment/{id}")
+    private void deleteComment(@PathVariable("id") int id) {
+        commentService.deleteComment(id);
+    }
 }

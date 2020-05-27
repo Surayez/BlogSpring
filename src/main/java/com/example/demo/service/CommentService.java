@@ -11,7 +11,7 @@ public interface CommentService {
     public Comment getComment(int commentId);
     public void saveComment(Comment comment);
     public void deleteComment(int commentId);
-    public void updateComment(Comment comment);
+    public void updateComment(Comment comment, int commentId);
     public List<Comment> getCommentByBlogId(String blogId);
 
 }

@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.entity.BlogPost;
 import com.example.demo.entity.Comment;
 import com.example.demo.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,12 +42,18 @@ public class CommentServiceImplement implements CommentService {
     }
 
     @Override
+    public void updateComment(Comment comment, int commentId) {
+        Comment prevComment = getComment(commentId);
+        prevComment.setEmail(comment.getEmail());
+        prevComment.setName(comment.getName());
+        prevComment.setCommentText(comment.getCommentText());
+        prevComment.setUpdatedAt(new Date());
+        commentRepository.save(prevComment);
+    }
+
+    @Override
     public void deleteComment(int commentId) {
         commentRepository.deleteById(commentId);
     }
 
-    @Override
-    public void updateComment(Comment comment) {
-        commentRepository.save(comment);
-    }
 }
