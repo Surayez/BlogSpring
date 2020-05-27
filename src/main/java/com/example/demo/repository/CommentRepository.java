@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface CommentRepository extends CrudRepository<Comment, Integer> {
     List<Comment> findByBlogId(String blogId);
+    List<Comment> findByParent(int parent);
 }
