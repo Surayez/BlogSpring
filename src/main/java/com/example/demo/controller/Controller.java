@@ -2,8 +2,10 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.BlogPost;
 import com.example.demo.entity.Comment;
+import com.example.demo.entity.UserObject;
 import com.example.demo.service.BlogService;
 import com.example.demo.service.CommentService;
+import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,8 +29,14 @@ public class Controller {
         this.commentService = commentService;
     }
 
+    @Autowired
+    private UserService userService;
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
 
-    // BLOG API
+
+    // BLOG SECTION
 
     @GetMapping("/blog")
     private List<BlogPost> getAllBlog() {
@@ -47,8 +55,20 @@ public class Controller {
 
     @PostMapping("/blog")
     private int saveBlog(BlogPost blog) {
-        blogService.saveBlog(blog);
-        return blog.getBlogId();
+        try {
+            if (blog.getUserId() != 0) {
+                UserObject user = userService.getUser(blog.getUserId());
+                blog.setEmail(user.getEmail());
+                blog.setFirst_name(user.getFirst_name());
+                blog.setLast_name(user.getLast_name());
+            }
+            blogService.saveBlog(blog);
+            return blog.getBlogId();
+        }
+        catch (Exception e) {
+            logger.log(Level.SEVERE, "Failed to save blog as no such user exists.");
+            return 0;
+        }
     }
 
     @PostMapping("/blog/{id}")
@@ -81,7 +101,7 @@ public class Controller {
         }
     }
 
-    // COMMENT API
+    // COMMENT SECTION
 
     @GetMapping("/comment/")
     private List<Comment> getComment() {
@@ -154,14 +174,49 @@ public class Controller {
     private void deleteComment(@PathVariable("id") int id) {
         commentService.deleteComment(id);
     }
+
+
+    // USERS SECTION
+
+    @GetMapping("/user")
+    private List<UserObject> getAllUsers() {
+        return userService.retrieveAllUsers();
+    }
+
+    @GetMapping("/user/{id}")
+    private UserObject getUser(@PathVariable("id") int id) {
+        return userService.getUser(id);
+    }
+
+    @DeleteMapping("/user/{id}")
+    private void deleteUser(@PathVariable("id") int id) {
+        userService.deleteUser(id);
+    }
+
+    @PostMapping("/user")
+    private int saveUser(UserObject user) {
+        userService.saveUser(user);
+        return user.getUserId();
+    }
+
+    @PostMapping("/user/{id}")
+    private int updateUser(@PathVariable("id") int id, UserObject user) {
+        userService.updateUser(user, id);
+        return user.getUserId();
+    }
+
+    @PostMapping("/userBlogs/{id}")
+    private List<BlogPost> getUserBlogs(@PathVariable("id") int id) {
+        return blogService.getBlogsByUserId(id);
+    }
 }
 
 // Upvotes/Downvotes
 // Threaded Comments
 // Users
+
 // SQL Injections
 // Paginated API
-
 // ReadMe
 // JUnitTests
 // Images (blobs)

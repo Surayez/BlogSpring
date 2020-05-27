@@ -8,15 +8,15 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name="TBL_BLOGS", schema = "BLOG")
-public class BlogPost {
+@Table(name="TBL_USERS", schema = "BLOG")
+public class UserObject {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "blog_seq")
-    @SequenceGenerator(name = "blog_seq", sequenceName = "blog_sequence", schema = "BLOG")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
+    @SequenceGenerator(name = "user_seq", sequenceName = "user_sequence", schema = "BLOG")
     @ApiModelProperty(hidden=true)
-    @Column(name="BLOG_ID")
-    private int blogId;
+    @Column(name="USER_ID")
+    private int userId;
 
     @Column(name="FIRST_NAME")
     private String first_name;
@@ -26,16 +26,6 @@ public class BlogPost {
 
     @Column(name="EMAIL")
     private String email;
-
-    @Column(name="BLOG")
-    private String blog;
-
-    @Column(name="USER_ID")
-    private int userId;
-
-    @ApiModelProperty(hidden=true)
-    @Column(name="VOTES")
-    private int votes;
 
     @ApiModelProperty(hidden=true)
     @Temporal(TemporalType.TIMESTAMP)
@@ -51,12 +41,13 @@ public class BlogPost {
 
     //getters and setters
 
-    public int getBlogId() {
-        return blogId;
+
+    public int getUserId() {
+        return userId;
     }
 
-    public void setBlogId(int blogId) {
-        this.blogId = blogId;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getFirst_name() {
@@ -83,14 +74,6 @@ public class BlogPost {
         this.email = email;
     }
 
-    public String getBlog() {
-        return blog;
-    }
-
-    public void setBlog(String blog) {
-        this.blog = blog;
-    }
-
     public Date getCreatedAt() {
         return createdAt;
     }
@@ -105,21 +88,5 @@ public class BlogPost {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    public int getVotes() {
-        return votes;
-    }
-
-    public void setVotes(int votes) {
-        this.votes = votes;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 }

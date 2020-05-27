@@ -7,6 +7,7 @@ import java.util.List;
 public interface BlogService {
     public List<BlogPost> retrieveAllBlog();
     public BlogPost getBlog(int blogId);
+    public List<BlogPost> getBlogsByUserId(int userId);
     public void saveBlog(BlogPost blog);
     public void deleteBlog(int blogId);
     public void updateBlog(BlogPost blog, int blogId);
