@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.BlogPost;
 import com.example.demo.entity.Comment;
 import com.example.demo.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +52,13 @@ public class CommentServiceImplement implements CommentService {
 
     @Override
     public void deleteComment(int commentId) {
+        List<Comment> childComments = commentRepository.findByParent(commentId);
         commentRepository.deleteById(commentId);
+        if (commentId != 0 && childComments.size() != 0) {
+            for(Comment com: childComments){
+                deleteComment(com.getCommentId());
+            }
+        }
     }
 
     @Override
