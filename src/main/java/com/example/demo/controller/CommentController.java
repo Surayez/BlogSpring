@@ -3,7 +3,6 @@ package com.example.demo.controller;
 import com.example.demo.entity.Comment;
 import com.example.demo.service.BlogService;
 import com.example.demo.service.CommentService;
-import org.apache.tomcat.jni.Error;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
