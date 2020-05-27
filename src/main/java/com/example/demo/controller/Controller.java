@@ -8,9 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @RestController
 public class Controller {
+    private static final Logger logger = Logger.getLogger(Controller.class.getName());
 
     @Autowired
     private BlogService blogService;
@@ -48,19 +51,32 @@ public class Controller {
         return blog.getBlogId();
     }
 
+
     // COMMENT API
 
-    @GetMapping("/comment/{id}")
-    private List<Comment> getComment(@PathVariable("id") int id) {
+    @GetMapping("/comment/")
+    private List<Comment> getComment() {
         return commentService.retrieveAllComments();
     }
 
     @PostMapping("/comment")
     private int saveComment(Comment comment) {
         // Check if the blog is present
-        blogService.getBlog(Integer.parseInt(comment.getBlogId()));
-        commentService.saveComment(comment);
-        return comment.getCommentId();
+        try {
+            blogService.getBlog(Integer.parseInt(comment.getBlogId()));
+            commentService.saveComment(comment);
+            return comment.getCommentId();
+        }
+        // Handle if blog isn't present
+        catch (Exception e){
+            logger.log(Level.SEVERE, "Failed to save comment as no such blog exists.");
+            return 0;
+        }
+    }
+
+    @GetMapping("/commentByBlogId/{id}")
+    private List<Comment> getCommentByBlogId(@PathVariable("id") String id) {
+        return commentService.getCommentByBlogId(id);
     }
 
 }

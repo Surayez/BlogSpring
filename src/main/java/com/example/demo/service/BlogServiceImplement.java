@@ -5,6 +5,8 @@ import com.example.demo.entity.BlogPost;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,6 +30,9 @@ public class BlogServiceImplement implements BlogService {
 
     @Override
     public void saveBlog(BlogPost blog) {
+        Date currentDate = new Date();
+        blog.setCreatedAt(currentDate);
+        blog.setUpdatedAt(currentDate);
         blogRepository.save(blog);
     }
 

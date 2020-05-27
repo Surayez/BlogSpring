@@ -1,6 +1,11 @@
 package com.example.demo.entity;
 
+import io.swagger.annotations.ApiModelProperty;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name="TBL_BLOGS", schema = "BLOG")
@@ -9,6 +14,7 @@ public class BlogPost {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "blog_seq")
     @SequenceGenerator(name = "blog_seq", sequenceName = "blog_sequence", schema = "BLOG")
+    @ApiModelProperty(hidden=true)
     @Column(name="BLOG_ID")
     private int blogId;
 
@@ -24,8 +30,19 @@ public class BlogPost {
     @Column(name="BLOG")
     private String blog;
 
-    //getters and setters
+    @ApiModelProperty(hidden=true)
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="created_at")
+    @CreatedDate
+    private Date createdAt;
 
+    @ApiModelProperty(hidden=true)
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="updated_at")
+    @LastModifiedDate
+    private Date updatedAt;
+
+    //getters and setters
 
     public int getBlogId() {
         return blogId;
@@ -65,5 +82,21 @@ public class BlogPost {
 
     public void setBlog(String blog) {
         this.blog = blog;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

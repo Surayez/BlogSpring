@@ -5,6 +5,7 @@ import com.example.demo.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,7 +27,16 @@ public class CommentServiceImplement implements CommentService {
     }
 
     @Override
+    public List<Comment> getCommentByBlogId(String blogId){
+        List<Comment> commentList = commentRepository.findByBlogId(blogId);
+        return commentList;
+    }
+
+    @Override
     public void saveComment(Comment comment) {
+        Date currentDate = new Date();
+        comment.setCreatedAt(currentDate);
+        comment.setUpdatedAt(currentDate);
         commentRepository.save(comment);
     }
 
