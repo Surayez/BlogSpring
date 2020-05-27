@@ -1,15 +1,12 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.BlogPost;
-import com.example.demo.entity.Comment;
 import com.example.demo.entity.UserObject;
 import com.example.demo.service.BlogService;
-import com.example.demo.service.CommentService;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @RestController
