@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
 
 @Entity
@@ -7,7 +9,8 @@ import javax.persistence.*;
 public class Comment {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "com_seq")
+    @SequenceGenerator(name = "com_seq", sequenceName = "comment_sequence", schema = "BLOG")
     @Column(name="COMMENT_ID")
     private int commentId;
 
@@ -20,6 +23,7 @@ public class Comment {
     @Column(name="COMMENT_text")
     private String commentText;
 
+    @ApiModelProperty(required = true)
     @Column(name="BLOG_ID")
     private String blogId;
 

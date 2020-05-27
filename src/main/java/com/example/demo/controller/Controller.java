@@ -18,7 +18,6 @@ public class Controller {
         this.blogService = blogService;
     }
 
-
     @Autowired
     private CommentService commentService;
     public void setCommentService(CommentService commentService) {
@@ -58,6 +57,8 @@ public class Controller {
 
     @PostMapping("/comment")
     private int saveComment(Comment comment) {
+        // Check if the blog is present
+        blogService.getBlog(Integer.parseInt(comment.getBlogId()));
         commentService.saveComment(comment);
         return comment.getCommentId();
     }
