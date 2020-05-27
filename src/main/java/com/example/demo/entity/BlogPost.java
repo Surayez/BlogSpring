@@ -7,8 +7,8 @@ import javax.persistence.*;
 public class BlogPost {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "blog_seq")
+    @SequenceGenerator(name = "blog_seq", sequenceName = "blog_sequence", schema = "BLOG")
     @Column(name="BLOG_ID")
     private int blogId;
 

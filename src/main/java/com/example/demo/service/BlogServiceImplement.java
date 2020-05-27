@@ -16,7 +16,7 @@ public class BlogServiceImplement implements BlogService {
 
     @Override
     public List<BlogPost> retrieveAllBlog() {
-        List<BlogPost> allBlog = blogRepository.findAll();
+        List<BlogPost> allBlog = (List<BlogPost>) blogRepository.findAll();
         return allBlog;
     }
 
