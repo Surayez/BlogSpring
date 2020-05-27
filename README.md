@@ -1,5 +1,5 @@
 # BlogSpring
-This is a simple SpringBoot application demonstrating a backend prototype for a personal blogging system, with a local h2 database.
+This is a simple SpringBoot application demonstrating a backend prototype for a personal blogging system, with a local H2 database.
 
 ## Features and Design
 Three important components of the system are: Users, Blog and Comments. The idea of this application is such that anyone can add a blog or comment to this system, but if a user is already registered, 
@@ -44,7 +44,7 @@ Anyone can up-vote or down-vote each comment using the following APIs:
 
 ## Running the application
 
-Please download the complete repository and build the gradle project. 
+Please download the complete repository, build the gradle project and run the SpringBoot Application.
 \
 Once the Springboot is running, Swagger UI would be available at: http://localhost:8080/swagger-ui.html and local database would be available at http://localhost:8080/h2-console/.
 Credentials for the database are set to default since it is local, and the database is cleared every time the application is stopped.
