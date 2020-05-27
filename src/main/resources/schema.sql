@@ -7,7 +7,9 @@ CREATE TABLE BLOG.TBL_BLOGS (
   first_name VARCHAR(250) NOT NULL,
   last_name VARCHAR(250) NOT NULL,
   email VARCHAR(250) DEFAULT NULL,
-  blog TEXT DEFAULT NULL
+  blog TEXT DEFAULT NULL,
+  created_at timestamp NOT NULL,
+  updated_at timestamp NOT NULL
 );
 
 CREATE TABLE BLOG.TBL_COMMENTS (
@@ -16,6 +18,8 @@ CREATE TABLE BLOG.TBL_COMMENTS (
   email VARCHAR(250) DEFAULT NULL,
   comment_text TEXT DEFAULT NULL,
   blog_id INT NOT NULL,
+  created_at timestamp NOT NULL,
+  updated_at timestamp NOT NULL,
   CONSTRAINT comment_primary_key PRIMARY KEY (comment_id)
 );
 
@@ -23,11 +27,11 @@ ALTER TABLE BLOG.TBL_COMMENTS
 ADD FOREIGN KEY (blog_id) REFERENCES BLOG.TBL_BLOGS(blog_id);
 
 CREATE SEQUENCE BLOG.blog_sequence
-    INCREMENT BY 500
+    INCREMENT BY 1
     MINVALUE 1;
 
 CREATE SEQUENCE BLOG.comment_sequence
-    INCREMENT BY 500
+    INCREMENT BY 1
     MINVALUE 1;
 
 COMMIT
