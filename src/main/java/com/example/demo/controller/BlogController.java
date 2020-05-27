@@ -94,24 +94,14 @@ public class BlogController {
 
     // BLOG PAGINATION
 
+    @GetMapping("/blogPaginated/{size}")
+    private int getTotalBlogPages(@RequestParam("size") int size) {
+        return blogService.getTotalPages(size);
+    }
+
     @GetMapping("/blogPaginated/{size}/{page}")
     private List<BlogPost> getPaginatedBlog(@RequestParam("size") int size, @RequestParam("page") int page) {
         return blogService.retrieveAllPagedBlogs(page, size);
     }
 
-    @GetMapping("/blogPaginated/{size}")
-    private int getTotalBlogPages(@RequestParam("size") int size) {
-        return blogService.getTotalPages(size);
-    }
 }
-
-// Upvotes/Downvotes
-// Threaded Comments
-// Users
-// Paginated API
-
-// SQL Injections
-// ReadMe
-// JUnitTests
-// Images (blobs)
-// Why and How
