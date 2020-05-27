@@ -8,7 +8,6 @@ import com.example.demo.service.CommentService;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -99,6 +98,18 @@ public class Controller {
             logger.log(Level.SEVERE, "Failed to upvote as no such blog exists.");
             return 0;
         }
+    }
+
+    // BLOG PAGINATION
+
+    @GetMapping("/blogPaginated/{size}/{page}")
+    private List<BlogPost> getPaginatedBlog(@RequestParam("size") int size, @RequestParam("page") int page) {
+        return blogService.retrieveAllPagedBlogs(page, size);
+    }
+
+    @GetMapping("/blogPaginated/{size}")
+    private int getTotalBlogPages(@RequestParam("size") int size) {
+        return blogService.getTotalPages(size);
     }
 
     // COMMENT SECTION
@@ -214,9 +225,9 @@ public class Controller {
 // Upvotes/Downvotes
 // Threaded Comments
 // Users
+// Paginated API
 
 // SQL Injections
-// Paginated API
 // ReadMe
 // JUnitTests
 // Images (blobs)

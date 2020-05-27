@@ -4,9 +4,11 @@ import com.example.demo.entity.Comment;
 import com.example.demo.repository.BlogRepository;
 import com.example.demo.entity.BlogPost;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -74,4 +76,38 @@ public class BlogServiceImplement implements BlogService {
         blogRepository.deleteById(blogId);
     }
 
+
+    @Override
+    public List<BlogPost> retrieveAllPagedBlogs(int page, int size){
+        List<BlogPost> allBlog = (List<BlogPost>) blogRepository.findAll();
+
+        // Error Handling
+        if (page == 0 || size == 0) {
+            return allBlog;
+        }
+
+        int start = (page - 1) * size;
+        int end = start + size;
+        if (start < allBlog.size()) {
+            if (end < allBlog.size()) {
+                return allBlog.subList(start, end);
+            }
+            return allBlog.subList(start, allBlog.size());
+        }
+        return new ArrayList<BlogPost>();
+    }
+
+    @Override
+    public int getTotalPages(int size){
+        // Error Handling
+        if(size == 0) {
+            return 1;
+        }
+
+        List<BlogPost> allBlog = (List<BlogPost>) blogRepository.findAll();
+        if (allBlog.size() % size != 0) {
+            return allBlog.size()/size + 1;
+        }
+        return allBlog.size()/size;
+    }
 }
