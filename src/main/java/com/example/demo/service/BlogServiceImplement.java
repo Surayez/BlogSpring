@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.entity.Comment;
 import com.example.demo.repository.BlogRepository;
 import com.example.demo.entity.BlogPost;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,12 @@ public class BlogServiceImplement implements BlogService {
     public BlogPost getBlog(int blogId) {
         Optional<BlogPost> person = blogRepository.findById(blogId);
         return person.get();
+    }
+
+    @Override
+    public List<BlogPost> getBlogsByUserId(int userId){
+        List<BlogPost> blogList = blogRepository.findByUserId(userId);
+        return blogList;
     }
 
     @Override
