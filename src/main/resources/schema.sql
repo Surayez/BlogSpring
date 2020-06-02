@@ -7,7 +7,7 @@ CREATE TABLE BLOG.TBL_BLOGS (
   first_name VARCHAR(250) NOT NULL,
   last_name VARCHAR(250) NOT NULL,
   email VARCHAR(250) DEFAULT NULL,
-  blog TEXT DEFAULT NULL,
+  blog VARCHAR(2000) DEFAULT NULL,
   votes INT DEFAULT 0,
   user_id INT DEFAULT 0,
   created_at timestamp NOT NULL,
