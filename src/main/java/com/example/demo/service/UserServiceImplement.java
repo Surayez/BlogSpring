@@ -2,12 +2,12 @@ package com.example.demo.service;
 
 import com.example.demo.entity.UserObject;
 import com.example.demo.repository.UserRepository;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.lang.reflect.Array;
+import java.util.*;
 
 @Service
 public class UserServiceImplement implements UserService{
@@ -24,6 +24,11 @@ public class UserServiceImplement implements UserService{
         Optional<UserObject> user = userRepository.findById(userId);
         return user.get();
     }
+
+//    public List<UserObject> getListedUser(int userId) {
+//        Optional<UserObject> user = userRepository.findById(userId);
+//        return new ArrayList<UserOb>(Collections.singletonList(user));
+//    }
 
     public void saveUser(UserObject user) {
         Date currentDate = new Date();

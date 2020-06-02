@@ -11,7 +11,8 @@ CREATE TABLE BLOG.TBL_BLOGS (
   votes INT DEFAULT 0,
   user_id INT DEFAULT 0,
   created_at timestamp NOT NULL,
-  updated_at timestamp NOT NULL
+  updated_at timestamp NOT NULL,
+  accessibility VARCHAR(50)
 );
 
 CREATE TABLE BLOG.TBL_COMMENTS (
@@ -24,6 +25,7 @@ CREATE TABLE BLOG.TBL_COMMENTS (
   parent INT DEFAULT 0,
   created_at timestamp NOT NULL,
   updated_at timestamp NOT NULL,
+  accessibility VARCHAR(50),
   CONSTRAINT comment_primary_key PRIMARY KEY (comment_id)
 );
 
