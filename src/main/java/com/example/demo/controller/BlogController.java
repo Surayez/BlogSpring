@@ -5,7 +5,10 @@ import com.example.demo.entity.UserObject;
 import com.example.demo.service.BlogService;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -58,7 +61,7 @@ public class BlogController {
         }
         catch (Exception e) {
             logger.log(Level.SEVERE, "Failed to save blog as no such user exists.");
-            return 0;
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
         }
     }
 
@@ -70,13 +73,13 @@ public class BlogController {
 
     @PostMapping("/blogUp/{id}")
     private int upvoteBlog(@PathVariable("id") int id) {
-        try{
+        try {
             blogService.upvoteBlog(id);
             return 1;
         }
         catch (Exception e) {
             logger.log(Level.SEVERE, "Failed to upvote as no such blog exists.");
-            return 0;
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
         }
     }
 
@@ -88,7 +91,7 @@ public class BlogController {
         }
         catch (Exception e) {
             logger.log(Level.SEVERE, "Failed to upvote as no such blog exists.");
-            return 0;
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
         }
     }
 

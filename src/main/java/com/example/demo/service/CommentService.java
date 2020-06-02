@@ -8,11 +8,11 @@ public interface CommentService {
 
     // Comments
     List<Comment> retrieveAllComments();
-    public Comment getComment(int commentId);
-    public void saveComment(Comment comment);
-    public void deleteComment(int commentId);
-    public void updateComment(Comment comment, int commentId);
-    public List<Comment> getCommentByBlogId(String blogId);
-    public void upvoteComment(int commentId);
-    public void downvoteComment(int commentId);
+    Comment getComment(int commentId);
+    void saveComment(Comment comment);
+    void deleteComment(int commentId);
+    void updateComment(Comment comment, int commentId);
+    List<Comment> getCommentByBlogId(String blogId);
+    void upvoteComment(int commentId);
+    void downvoteComment(int commentId);
 }

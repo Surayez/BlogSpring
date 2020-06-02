@@ -1,13 +1,10 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.Comment;
 import com.example.demo.repository.BlogRepository;
 import com.example.demo.entity.BlogPost;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -79,6 +76,8 @@ public class BlogServiceImplement implements BlogService {
 
     @Override
     public List<BlogPost> retrieveAllPagedBlogs(int page, int size){
+        // Could do SQL queries here to make it efficient.
+
         List<BlogPost> allBlog = (List<BlogPost>) blogRepository.findAll();
 
         // Error Handling

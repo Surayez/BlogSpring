@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Entity
 @Table(name="TBL_BLOGS", schema = "BLOG")
-public class BlogPost {
+public class BlogPost extends BaseEntityProperties{
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "blog_seq")
@@ -49,7 +49,22 @@ public class BlogPost {
     @LastModifiedDate
     private Date updatedAt;
 
+
+    @ApiModelProperty(hidden=true)
+    @Column(name="accessibility")
+    private String accessibility = getAccessibilityDescription();
+
+
     //getters and setters
+
+
+    public String getAccessibility() {
+        return accessibility;
+    }
+
+    public void setAccessibility(String accessibility) {
+        this.accessibility = accessibility;
+    }
 
     public int getBlogId() {
         return blogId;
@@ -121,5 +136,10 @@ public class BlogPost {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    @Override
+    String getAccessibilityDescription() {
+        return "Accessibility friendly";
     }
 }

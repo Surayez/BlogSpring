@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Entity
 @Table(name="TBL_COMMENTS", schema = "BLOG")
-public class Comment {
+public class Comment extends BaseEntityProperties {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "com_seq")
@@ -49,7 +49,21 @@ public class Comment {
     @Column(name="updated_at")
     @LastModifiedDate
     private Date updatedAt;
-    //getters and setters
+
+    @ApiModelProperty(hidden=true)
+    @Column(name="accessibility")
+    private String accessibility = getAccessibilityDescription();
+
+
+    // Getters and setters
+
+    public String getAccessibility() {
+        return accessibility;
+    }
+
+    public void setAccessibility(String access) {
+        this.accessibility = access;
+    }
 
     public int getCommentId() {
         return commentId;
@@ -121,5 +135,18 @@ public class Comment {
 
     public void setParent(int parent) {
         this.parent = parent;
+    }
+
+    /**
+     * This method below is creating a concrete instance of BaseComment abstract class.
+     *
+     * The property "access" will get the return value of this method call.
+     *
+     * @return accessible content
+     */
+
+    @Override
+    String getAccessibilityDescription() {
+        return "Accessibility friendly content";
     }
 }
