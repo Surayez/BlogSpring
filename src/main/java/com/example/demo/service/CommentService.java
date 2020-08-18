@@ -6,7 +6,8 @@ import java.util.List;
 
 public interface CommentService {
 
-    // Comments
+    // Comment Services
+
     List<Comment> retrieveAllComments();
     Comment getComment(int commentId);
     void saveComment(Comment comment);
@@ -15,4 +16,5 @@ public interface CommentService {
     List<Comment> getCommentByBlogId(String blogId);
     void upvoteComment(int commentId);
     void downvoteComment(int commentId);
+
 }
